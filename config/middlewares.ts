@@ -1,8 +1,29 @@
 export default [
-  'strapi::logger',
+  {
+    name: 'strapi::logger',
+    config: {
+      level: 'debug', // trace
+    },
+  },
   'strapi::errors',
-  'strapi::security',
-  'strapi::cors',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'http:'],
+        },
+      },
+    },
+  },
+  {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      origin: '*',
+    },
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
